@@ -322,6 +322,29 @@
     XCTAssertFalse( [dict boolForKey: key] );
 }
 
+-( void )test_boolForKey_works_with_non_string_keys
+{
+     NSNumber *nonStringKey = @666;
+    
+    dict[ nonStringKey ] = @"no";
+    XCTAssertFalse( [dict boolForKey: nonStringKey] );
+    
+    dict[ nonStringKey ] = @"false";
+    XCTAssertFalse( [dict boolForKey: nonStringKey] );
+    
+    dict[ nonStringKey ] = @"yes";
+    XCTAssertTrue( [dict boolForKey: nonStringKey] );
+    
+    dict[ nonStringKey ] = @"true";
+    XCTAssertTrue( [dict boolForKey: nonStringKey] );
+    
+    dict[ nonStringKey ] = @0;
+    XCTAssertFalse( [dict boolForKey: nonStringKey] );
+    
+    dict[ nonStringKey ] = @1001;
+    XCTAssertTrue( [dict boolForKey: nonStringKey] );
+}
+
 -( void )test_boolForKey_does_not_follow_key_paths
 {
     dict[ @"a" ] = @{ @"b": @"true" };
@@ -353,6 +376,24 @@
     NSObject *temp = [[NSObject alloc] init];
     dict[ key ] = temp;
     XCTAssertEqualObjects( [dict stringForKey: key], [temp description] );
+}
+
+-( void )test_stringForKey_works_with_non_string_keys
+{
+    NSNumber *nonStringKey = @666;
+    
+    dict[ nonStringKey ] = @1;
+    XCTAssertEqualObjects( [dict stringForKey: nonStringKey], @"1" );
+    
+    dict[ nonStringKey ] = @( -1 );
+    XCTAssertEqualObjects( [dict stringForKey: nonStringKey], @"-1" );
+    
+    dict[ nonStringKey ] = @"test";
+    XCTAssertEqualObjects( [dict stringForKey: nonStringKey], @"test" );
+    
+    NSObject *temp = [[NSObject alloc] init];
+    dict[ nonStringKey ] = temp;
+    XCTAssertEqualObjects( [dict stringForKey: nonStringKey], [temp description] );
 }
 
 -( void )test_stringForKey_returns_nil_when_key_does_not_exist
@@ -402,6 +443,24 @@
     
     dict[ key ] = @[ [NSNull null] ];
     XCTAssertEqualObjects( [dict arrayForKey: key], @[ [NSNull null] ] );
+}
+
+-( void )test_arrayForKey_works_with_non_string_keys
+{
+    NSNumber *nonStringKey = @666;
+    
+    dict[ nonStringKey ] = @[];
+    XCTAssertEqualObjects( [dict arrayForKey: nonStringKey], @[] );
+    
+    dict[ nonStringKey ] = @[ @0 ];
+    XCTAssertEqualObjects( [dict arrayForKey: nonStringKey], @[ @0 ] );
+    
+    dict[ nonStringKey ] = @[ @0, @1, @2 ];
+    NSArray *expected = @[ @0, @1, @2 ];
+    XCTAssertEqualObjects( [dict arrayForKey: nonStringKey], expected );
+    
+    dict[ nonStringKey ] = @[ [NSNull null] ];
+    XCTAssertEqualObjects( [dict arrayForKey: nonStringKey], @[ [NSNull null] ] );
 }
 
 -( void )test_arrayForKey_returns_nil_when_key_does_not_exist
@@ -472,6 +531,28 @@
     
     dict[ key ] = @{ @"key-0": [NSNull null] };
     XCTAssertEqualObjects( [dict dictionaryForKey: key], @{ @"key-0": [NSNull null] } );
+}
+
+-( void )test_dictionaryForKey_works_with_non_string_keys
+{
+    NSNumber *nonStringKey = @666;
+    
+    dict[ nonStringKey ] = @{};
+    XCTAssertEqualObjects( [dict dictionaryForKey: nonStringKey], @{} );
+    
+    dict[ nonStringKey ] = @{ @"key-0": @0 };
+    XCTAssertEqualObjects( [dict dictionaryForKey: nonStringKey], @{ @"key-0": @0 } );
+    
+    dict[ nonStringKey ] = @{ @"key-0": @0,
+                     @"key-1": @1,
+                     @"key-2": @2 };
+    NSDictionary *expected = @{ @"key-0": @0,
+                                @"key-1": @1,
+                                @"key-2": @2 };
+    XCTAssertEqualObjects( [dict dictionaryForKey: nonStringKey], expected );
+    
+    dict[ nonStringKey ] = @{ @"key-0": [NSNull null] };
+    XCTAssertEqualObjects( [dict dictionaryForKey: nonStringKey], @{ @"key-0": [NSNull null] } );
 }
 
 -( void )test_dictionaryForKey_returns_nil_when_key_does_not_exist
