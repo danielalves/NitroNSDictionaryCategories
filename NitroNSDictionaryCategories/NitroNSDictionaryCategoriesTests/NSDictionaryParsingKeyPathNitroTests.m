@@ -324,6 +324,9 @@
 
 -( void )test_boolForKeyPath_follows_key_paths
 {
+    dict[ @"0" ] = @"y";
+    XCTAssertTrue( [dict boolForKeyPath: @"0"] );
+    
     dict[ @"a" ] = @{ @"b": @"true" };
     XCTAssertTrue( [dict boolForKeyPath: @"a/b"] );
     
@@ -333,6 +336,9 @@
     dict[ @"a" ] = @[ @[ @{ @"b": @"false" } ], @[ @{ @"b": @"yes" } ] ];
     XCTAssertTrue( [dict boolForKeyPath: @"a/1/0/b"] );
     
+
+    dict[ @"0" ] = @"n";
+    XCTAssertFalse( [dict boolForKeyPath: @"0"] );
     
     dict[ @"a" ] = @{ @"b": @"false" };
     XCTAssertFalse( [dict boolForKeyPath: @"a/b"] );
@@ -344,6 +350,9 @@
     XCTAssertFalse( [dict boolForKeyPath: @"a/1/0/b"] );
     
     
+    dict[ @"0" ] = @1;
+    XCTAssertTrue( [dict boolForKeyPath: @"0"] );
+    
     dict[ @"a" ] = @{ @"b": @10 };
     XCTAssertTrue( [dict boolForKeyPath: @"a/b"] );
     
@@ -353,6 +362,9 @@
     dict[ @"a" ] = @[ @[ @{ @"b": @"false" } ], @[ @{ @"b": @1000 } ] ];
     XCTAssertTrue( [dict boolForKeyPath: @"a/1/0/b"] );
     
+
+    dict[ @"0" ] = @0;
+    XCTAssertFalse( [dict boolForKeyPath: @"0"] );
     
     dict[ @"a" ] = @{ @"b": @0 };
     XCTAssertFalse( [dict boolForKeyPath: @"a/b"] );
@@ -400,6 +412,9 @@
 
 -( void )test_stringForKeyPath_follows_key_paths
 {
+    dict[ @"0" ] = @"test";
+    XCTAssertEqualObjects( [dict stringForKeyPath: @"0"], @"test" );
+    
     dict[ @"a" ] = @{ @"b": @"test" };
     XCTAssertEqualObjects( [dict stringForKeyPath: @"a/b"], @"test" );
     
@@ -412,7 +427,138 @@
 
 #pragma mark - arrayForKeyPath: tests
 
+-( void )test_arrayForKeyPath_returns_array_if_key_exists
+{
+    dict[ key ] = @[];
+    XCTAssertEqualObjects( [dict arrayForKeyPath: key], @[] );
+    
+    dict[ key ] = @[ @0 ];
+    XCTAssertEqualObjects( [dict arrayForKeyPath: key], @[ @0 ] );
+    
+    dict[ key ] = @[ @0, @1, @2 ];
+    NSArray *expected = @[ @0, @1, @2 ];
+    XCTAssertEqualObjects( [dict arrayForKeyPath: key], expected );
+    
+    dict[ key ] = @[ [NSNull null] ];
+    XCTAssertEqualObjects( [dict arrayForKeyPath: key], @[ [NSNull null] ] );
+}
+
+-( void )test_arrayForKeyPath_returns_nil_when_key_does_not_exist
+{
+    XCTAssertNil( [dict arrayForKeyPath: @"kjsabdjhbsd"] );
+}
+
+-( void )test_arrayForKeyPath_returns_nil_when_key_is_nil
+{
+    XCTAssertNil( [dict arrayForKeyPath: nil] );
+}
+
+-( void )test_arrayForKeyPath_returns_nil_when_object_cannot_be_converted_to_array
+{
+    dict[ key ] = [NSNull null];
+    XCTAssertNil( [dict arrayForKeyPath: key] );
+    
+    dict[ key ] = @"";
+    XCTAssertNil( [dict arrayForKeyPath: key] );
+    
+    dict[ key ] = @"TMNT Teenage Mutant Ninja Turtles";
+    XCTAssertNil( [dict arrayForKeyPath: key] );
+    
+    dict[ key ] = @100;
+    XCTAssertNil( [dict arrayForKeyPath: key] );
+    
+    dict[ key ] = @{};
+    XCTAssertNil( [dict arrayForKeyPath: key] );
+    
+    dict[ key ] = @{ @"0" : @1000 };
+    XCTAssertNil( [dict arrayForKeyPath: key] );
+}
+
+-( void )test_arrayForKeyPath_follows_key_paths
+{
+    dict[ @"0" ] = @[ @1, @2, @3 ];
+    NSArray *expected = @[ @1, @2, @3 ];
+    XCTAssertEqualObjects( [dict arrayForKeyPath: @"0"], expected );
+
+    dict[ @"a" ] = @{ @"b": @[ @1, @2, @3 ] };
+    expected = @[ @1, @2, @3 ];
+    XCTAssertEqualObjects( [dict arrayForKeyPath: @"a/b"], expected );
+    
+    dict[ @"a" ] = @[ @{ @"b": @[ @1, @2, @3 ] }, @{ @"b": @[ @4, @5, @6 ] } ];
+    expected = @[ @4, @5, @6 ];
+    XCTAssertEqualObjects( [dict arrayForKeyPath: @"a/1/b"], expected );
+    
+    dict[ @"a" ] = @[ @[ @{ @"b": @[ @1, @2, @3 ] } ], @[ @{ @"b": @[ @4, @5, @6 ] } ] ];
+    XCTAssertEqualObjects( [dict arrayForKeyPath: @"a/1/0/b"], expected );
+}
+
 #pragma mark - dictionaryForKeyPath: tests
+
+-( void )test_dictionaryForKeyPath_returns_dictionary_if_key_exists
+{
+    dict[ key ] = @{};
+    XCTAssertEqualObjects( [dict dictionaryForKeyPath: key], @{} );
+    
+    dict[ key ] = @{ @"key-0": @0 };
+    XCTAssertEqualObjects( [dict dictionaryForKeyPath: key], @{ @"key-0": @0 } );
+    
+    dict[ key ] = @{ @"key-0": @0,
+                     @"key-1": @1,
+                     @"key-2": @2 };
+    NSDictionary *expected = @{ @"key-0": @0,
+                                @"key-1": @1,
+                                @"key-2": @2 };
+    XCTAssertEqualObjects( [dict dictionaryForKeyPath: key], expected );
+    
+    dict[ key ] = @{ @"key-0": [NSNull null] };
+    XCTAssertEqualObjects( [dict dictionaryForKeyPath: key], @{ @"key-0": [NSNull null] } );
+}
+
+-( void )test_dictionaryForKeyPath_returns_nil_when_key_does_not_exist
+{
+    XCTAssertNil( [dict dictionaryForKeyPath: @"kjsabdjhbsd"] );
+}
+
+-( void )test_dictionaryForKeyPath_returns_nil_when_key_is_nil
+{
+    XCTAssertNil( [dict dictionaryForKeyPath: nil] );
+}
+
+-( void )test_dictionaryForKeyPath_returns_nil_when_object_cannot_be_converted_to_dictionary
+{
+    dict[ key ] = [NSNull null];
+    XCTAssertNil( [dict dictionaryForKeyPath: key] );
+    
+    dict[ key ] = @"";
+    XCTAssertNil( [dict dictionaryForKeyPath: key] );
+    
+    dict[ key ] = @"Samurai Jack";
+    XCTAssertNil( [dict dictionaryForKeyPath: key] );
+    
+    dict[ key ] = @100;
+    XCTAssertNil( [dict dictionaryForKeyPath: key] );
+    
+    dict[ key ] = @[];
+    XCTAssertNil( [dict dictionaryForKeyPath: key] );
+    
+    dict[ key ] = @[ @0, @1, @2 ];
+    XCTAssertNil( [dict dictionaryForKeyPath: key] );
+}
+
+-( void )test_dictionaryForKeyPath_follows_key_paths
+{
+    dict[ @"0" ] = @{ @"b": @6 };
+    XCTAssertEqualObjects( [dict dictionaryForKeyPath: @"0"], @{ @"b": @6 } );
+    
+    dict[ @"a" ] = @{ @"b": @{ @"c" : @90 } };
+    XCTAssertEqualObjects( [dict dictionaryForKeyPath: @"a/b"], @{ @"c" : @90 } );
+    
+    dict[ @"a" ] = @[ @{ @"b": @{ @"bla": @1 } }, @{ @"b": @{ @"ble": @33 } } ];
+    XCTAssertEqualObjects( [dict dictionaryForKeyPath: @"a/1/b"], @{ @"ble": @33 } );
+    
+    dict[ @"a" ] = @[ @[ @{ @"b": @{ @"bla": @1 } } ], @[ @{ @"b": @{ @"ble": @33 } } ] ];
+    XCTAssertEqualObjects( [dict dictionaryForKeyPath: @"a/1/0/b"], @{ @"ble": @33 } );
+}
 
 #pragma mark - numberForKeyPath: tests
 
