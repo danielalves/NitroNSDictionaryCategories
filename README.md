@@ -57,3 +57,13 @@ NSNumber *damage = [backpack numberForKeyPath: @"5/properties/0/bonus-damage"];
 - `hasKey:`: Returns if the dictionary contains the specified key.
 - `keyForObject:`: Returns the key of a given object contained in the dictionary.
 - `getFirstNonNullValueOfKeys:`: Searches the dictionary for the first object which is not nil and not equal to NSNull.
+
+Author
+------
+
+- [Daniel L. Alves](http://github.com/danielalves) ([@alveslopesdan](https://twitter.com/alveslopesdan))
+
+License
+-------
+
+**NitroNSDictionaryCategories** is available under the MIT license. See the LICENSE file for more info.
