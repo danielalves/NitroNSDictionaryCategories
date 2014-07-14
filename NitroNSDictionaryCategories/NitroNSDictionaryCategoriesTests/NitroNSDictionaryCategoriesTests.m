@@ -574,10 +574,12 @@
 
 -( void )test_dateForKey_withFormatter_returns_date_if_key_exists
 {
-    dict[ key ] = [[NitroNSDictionaryCategoriesTests dateFormatter] dateFromString: @"08/09/1983 08:00"];
-    NSDate *date = [[NitroNSDictionaryCategoriesTests dateFormatter] dateFromString: @"08/09/1983 08:00"];
+    // Before 12:00
+    dict[ key ] = @"08/09/1983 08:00";
+    NSDate *date = [[NitroNSDictionaryCategoriesTests dateFormatter] dateFromString: dict[ key ]];
     XCTAssertEqualObjects( [dict dateForKey: key withFormatter:[NitroNSDictionaryCategoriesTests dateFormatter]], date );
 
+    // After 12:00
     dict[ key ] = @"10/11/2013 13:32";
     date = [[NitroNSDictionaryCategoriesTests dateFormatter] dateFromString: dict[ key ]];
     XCTAssertEqualObjects( [dict dateForKey: key withFormatter:[NitroNSDictionaryCategoriesTests dateFormatter]], date );
@@ -585,8 +587,24 @@
 
 -( void )test_dateForKey_withFormatter_works_with_non_string_keys
 {
-    // TODO !!!!
-    // ...
+     NSNumber *nonStringKey = @666;
+    
+    dict[ nonStringKey ] = [[NitroNSDictionaryCategoriesTests dateFormatter] dateFromString: @"08/09/1983 08:00"];
+    NSDate *date = [[NitroNSDictionaryCategoriesTests dateFormatter] dateFromString: @"08/09/1983 08:00"];
+    XCTAssertEqualObjects( [dict dateForKey: nonStringKey withFormatter:[NitroNSDictionaryCategoriesTests dateFormatter]], date );
+    
+    dict[ nonStringKey ] = @"10/11/2013 13:32";
+    date = [[NitroNSDictionaryCategoriesTests dateFormatter] dateFromString: dict[ nonStringKey ]];
+    XCTAssertEqualObjects( [dict dateForKey: nonStringKey withFormatter:[NitroNSDictionaryCategoriesTests dateFormatter]], date );
+}
+
+-( void )test_dateForKey_withFormatter_works_with_date_values
+{
+    dict[ key ] = [[NitroNSDictionaryCategoriesTests dateFormatter] dateFromString: @"08/09/1983 08:00"];
+    NSDate *expected = [[NitroNSDictionaryCategoriesTests dateFormatter] dateFromString: @"08/09/1983 08:00"];
+    
+    XCTAssertEqualObjects( [dict dateForKey: key withFormatter: [NitroNSDictionaryCategoriesTests dateFormatter]], expected );
+    
 }
 
 -( void )test_dateForKey_withFormatter_returns_nil_when_key_does_not_exist
