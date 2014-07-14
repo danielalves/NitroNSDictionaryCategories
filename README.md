@@ -28,14 +28,14 @@ Following a key path is a powerful functionality which lets the user traverse ne
    // Other items
    // ...
 ]}
- ```
+```
+
+We would parse the lightning bonus damage of Ultra Lightning Sword of Slashing with a single call:
  
- We would parse the lightning bonus damage of Ultra Lightning Sword of Slashing with a single call:
- 
- ```objc
- NSNumber *damage = [backpack numberForKeyPath: @"5/properties/0/bonus-damage"];
- ```
- 
+```objc
+NSNumber *damage = [backpack numberForKeyPath: @"5/properties/0/bonus-damage"];
+```
+
 **Available parsing methods are:**
 
 - `boolForKey:`: Tries to parse a boolean from the value referenced by key. It supports numeric values and strings.
@@ -44,7 +44,6 @@ Following a key path is a powerful functionality which lets the user traverse ne
 - `dictionaryForKey:`: Tries to parse a dictionary from the value referenced by key.
 - `numberForKey:`: Tries to parse a number from the value referenced by key.
 - `dateForKey:withFormatter:`: Tries to parse a date from the value referenced by key.
-
 - `boolForKeyPath:`: The same as `boolForKey:`, but handles `key` as a key path.
 - `stringForKeyPath:`: The same as `stringForKey:`, but handles `key` as a key path.
 - `arrayForKeyPath:`: The same as `arrayForKey:`, but handles `key` as a key path.
