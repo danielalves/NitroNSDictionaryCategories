@@ -190,22 +190,20 @@
 
 -( NSString * )stringForKey:( id )key
 {
-    id temp = [NSDictionary objectForKey: key fromDictionaryNode: self];
-    if( temp )
-        return [NSString stringWithFormat: @"%@", temp];
+    id obj = [NSDictionary objectForKey: key fromDictionaryNode: self];
+    if( obj )
+        return [NSString stringWithFormat: @"%@", obj];
     
     return nil;
 }
 
 -( NSString * )stringForKeyPath:( NSString * )keyPath
 {
-	NSString *ret = nil;
-    
     id obj = [self nilCheckedObjectForKeyPath: keyPath];
     if( obj )
-        ret = [NSString stringWithFormat: @"%@", obj];
+        return [NSString stringWithFormat: @"%@", obj];
     
-	return ret;
+	return nil;
 }
 
 #pragma mark - NSArray Parsing
@@ -220,12 +218,12 @@
 
 -( NSArray * )arrayForKeyPath:( NSString * )keyPath
 {
-	id temp = [self nilCheckedObjectForKeyPath: keyPath];
+	id obj = [self nilCheckedObjectForKeyPath: keyPath];
     
-    if( ![temp isKindOfClass: [NSArray class]] )
-        temp = nil;
+    if( [obj isKindOfClass: [NSArray class]] )
+        return obj;
     
-    return temp;
+    return nil;
 }
 
 #pragma mark - NSDictionary Parsing
@@ -240,12 +238,12 @@
 
 -( NSDictionary * )dictionaryForKeyPath:( NSString * )keyPath
 {
-	id temp = [self nilCheckedObjectForKeyPath: keyPath];
+	id obj = [self nilCheckedObjectForKeyPath: keyPath];
     
-    if( ![temp isKindOfClass: [NSDictionary class]] )
-        temp = nil;
+    if( [obj isKindOfClass: [NSDictionary class]] )
+        return obj;
     
-    return temp;
+    return nil;
 }
 
 #pragma mark - NSNumber Parsing
@@ -263,13 +261,12 @@
 
 -( NSNumber * )numberForKeyPath:( NSString * )keyPath
 {
-    id ret = [self nilCheckedObjectForKeyPath: keyPath];
-    if( ret )
-    {
-        if( ![ret isKindOfClass: [NSNumber class]] )
-            ret = [NSDictionary tryParsingNumberFromObject: ret];
-    }
-	return ( NSNumber * )ret;
+    id obj = [self nilCheckedObjectForKeyPath: keyPath];
+    
+    if( [obj isKindOfClass: [NSNumber class]] )
+        return obj;
+    
+    return [NSDictionary tryParsingNumberFromObject: obj];
 }
 
 +( id )tryParsingNumberFromObject:( id )obj
@@ -297,8 +294,8 @@
     if( !dateFormatter )
         [NSException raise: NSInvalidArgumentException format: @"%s must not be nil", EVAL_AND_STRINGIFY(dateFormatter)];
 
-    id temp = [NSDictionary objectForKey: key fromDictionaryNode: self];
-    return ( NSDate * )[NSDictionary tryParsingDateFromObject: temp withDateFormatter: dateFormatter];
+    id obj = [NSDictionary objectForKey: key fromDictionaryNode: self];
+    return [NSDictionary tryParsingDateFromObject: obj withDateFormatter: dateFormatter];
 }
 
 -( NSDate * )dateForKeyPath:( NSString * )keyPath withFormatter:( NSDateFormatter * )dateFormatter
@@ -306,9 +303,9 @@
     if( !dateFormatter )
         [NSException raise: NSInvalidArgumentException format: @"%s must not be nil", EVAL_AND_STRINGIFY(dateFormatter)];
     
-    id ret = [self nilCheckedObjectForKeyPath: keyPath];
-    if( ret )
-        return ( NSDate * )[NSDictionary tryParsingDateFromObject: ret withDateFormatter: dateFormatter];
+    id obj = [self nilCheckedObjectForKeyPath: keyPath];
+    if( obj )
+        return [NSDictionary tryParsingDateFromObject: obj withDateFormatter: dateFormatter];
 
 	return nil;
 }
