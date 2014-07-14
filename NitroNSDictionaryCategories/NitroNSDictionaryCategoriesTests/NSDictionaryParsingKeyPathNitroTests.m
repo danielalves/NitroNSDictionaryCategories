@@ -562,6 +562,123 @@
 
 #pragma mark - numberForKeyPath: tests
 
+-( void )test_numberForKeyPath_returns_number_if_key_exists
+{
+    dict[ key ] = @(-90);
+    XCTAssertEqualObjects( [dict numberForKeyPath: key], @(-90) );
+    
+    dict[ key ] = @5;
+    XCTAssertEqualObjects( [dict numberForKeyPath: key], @5 );
+    
+    dict[ key ] = @(-8.554);
+    XCTAssertEqualObjects( [dict numberForKeyPath: key], @(-8.554) );
+    
+    dict[ key ] = @3.71;
+    XCTAssertEqualObjects( [dict numberForKeyPath: key], @3.71 );
+    
+    dict[ key ] = @9.76e10;
+    XCTAssertEqualObjects( [dict numberForKeyPath: key], @9.76e10 );
+    
+    dict[ key ] = @"-90";
+    XCTAssertEqualObjects( [dict numberForKeyPath: key], @(-90) );
+    
+    dict[ key ] = @"5";
+    XCTAssertEqualObjects( [dict numberForKeyPath: key], @5 );
+    
+    dict[ key ] = @"-8.554";
+    XCTAssertEqualObjects( [dict numberForKeyPath: key], @(-8.554) );
+    
+    dict[ key ] = @"3.71";
+    XCTAssertEqualObjects( [dict numberForKeyPath: key], @3.71 );
+    
+    dict[ key ] = @"9.76e10";
+    XCTAssertEqualObjects( [dict numberForKeyPath: key], @9.76e10 );
+}
+
+-( void )test_numberForKeyPath_works_with_non_string_keys
+{
+    NSNumber *nonStringKey = @666;
+    
+    dict[ nonStringKey ] = @(-90);
+    XCTAssertEqualObjects( [dict numberForKeyPath: nonStringKey], @(-90) );
+    
+    dict[ nonStringKey ] = @5;
+    XCTAssertEqualObjects( [dict numberForKeyPath: nonStringKey], @5 );
+    
+    dict[ nonStringKey ] = @(-8.554);
+    XCTAssertEqualObjects( [dict numberForKeyPath: nonStringKey], @(-8.554) );
+    
+    dict[ nonStringKey ] = @3.71;
+    XCTAssertEqualObjects( [dict numberForKeyPath: nonStringKey], @3.71 );
+    
+    dict[ nonStringKey ] = @9.76e10;
+    XCTAssertEqualObjects( [dict numberForKeyPath: nonStringKey], @9.76e10 );
+    
+    dict[ nonStringKey ] = @"-90";
+    XCTAssertEqualObjects( [dict numberForKeyPath: nonStringKey], @(-90) );
+    
+    dict[ nonStringKey ] = @"5";
+    XCTAssertEqualObjects( [dict numberForKeyPath: nonStringKey], @5 );
+    
+    dict[ nonStringKey ] = @"-8.554";
+    XCTAssertEqualObjects( [dict numberForKeyPath: nonStringKey], @(-8.554) );
+    
+    dict[ nonStringKey ] = @"3.71";
+    XCTAssertEqualObjects( [dict numberForKeyPath: nonStringKey], @3.71 );
+    
+    dict[ nonStringKey ] = @"9.76e10";
+    XCTAssertEqualObjects( [dict numberForKeyPath: nonStringKey], @9.76e10 );
+}
+
+-( void )test_numberForKeyPath_returns_nil_when_key_does_not_exist
+{
+    XCTAssertNil( [dict numberForKeyPath: @"kjsabdjhbsd"] );
+}
+
+-( void )test_numberForKeyPath_returns_nil_when_key_is_nil
+{
+    XCTAssertNil( [dict numberForKeyPath: nil] );
+}
+
+-( void )test_numberForKeyPath_returns_nil_when_object_cannot_be_converted_to_number
+{
+    dict[ key ] = [NSNull null];
+    XCTAssertNil( [dict numberForKeyPath: key] );
+    
+    dict[ key ] = @"";
+    XCTAssertNil( [dict numberForKeyPath: key] );
+    
+    dict[ key ] = @"Swat Katz";
+    XCTAssertNil( [dict numberForKeyPath: key] );
+    
+    dict[ key ] = @{};
+    XCTAssertNil( [dict numberForKeyPath: key] );
+    
+    dict[ key ] = @{ @"key-0": @0 };
+    XCTAssertNil( [dict numberForKeyPath: key] );
+    
+    dict[ key ] = @[];
+    XCTAssertNil( [dict numberForKeyPath: key] );
+    
+    dict[ key ] = @[ @0, @1, @2 ];
+    XCTAssertNil( [dict numberForKeyPath: key] );
+}
+
+-( void )test_numberForKeyPath_follows_key_paths
+{
+    dict[ @"0" ] = @67.22;
+    XCTAssertEqualObjects( [dict numberForKeyPath: @"0"], @67.22 );
+    
+    dict[ @"a" ] = @{ @"b": @25.12 };
+    XCTAssertEqualObjects( [dict numberForKeyPath: @"a/b"], @25.12 );
+    
+    dict[ @"a" ] = @[ @{ @"b": @1009 }, @{ @"b": @13 } ];
+    XCTAssertEqualObjects( [dict numberForKeyPath: @"a/1/b"], @13 );
+    
+    dict[ @"a" ] = @[ @[ @{ @"b": @97000 } ], @[ @{ @"b": @2103.77 } ] ];
+    XCTAssertEqualObjects( [dict numberForKeyPath: @"a/1/0/b"], @2103.77 );
+}
+
 #pragma mark - dateForKeyPath:withFormatter: tests
 
 #pragma mark - Helpers
