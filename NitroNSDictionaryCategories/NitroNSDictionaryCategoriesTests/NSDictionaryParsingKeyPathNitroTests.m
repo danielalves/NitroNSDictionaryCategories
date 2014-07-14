@@ -327,11 +327,41 @@
     dict[ @"a" ] = @{ @"b": @"true" };
     XCTAssertTrue( [dict boolForKeyPath: @"a/b"] );
     
-    dict[ @"a" ] = @[ @{ @"b": @"false" }, @{ @"b": @"true" } ];
+    dict[ @"a" ] = @[ @{ @"b": @"false" }, @{ @"b": @"t" } ];
     XCTAssertTrue( [dict boolForKeyPath: @"a/1/b"] );
     
-    dict[ @"a" ] = @[ @[ @{ @"b": @"false" } ], @[ @{ @"b": @"true" } ] ];
+    dict[ @"a" ] = @[ @[ @{ @"b": @"false" } ], @[ @{ @"b": @"yes" } ] ];
     XCTAssertTrue( [dict boolForKeyPath: @"a/1/0/b"] );
+    
+    
+    dict[ @"a" ] = @{ @"b": @"false" };
+    XCTAssertFalse( [dict boolForKeyPath: @"a/b"] );
+    
+    dict[ @"a" ] = @[ @{ @"b": @"false" }, @{ @"b": @"f" } ];
+    XCTAssertFalse( [dict boolForKeyPath: @"a/1/b"] );
+    
+    dict[ @"a" ] = @[ @[ @{ @"b": @"false" } ], @[ @{ @"b": @"no" } ] ];
+    XCTAssertFalse( [dict boolForKeyPath: @"a/1/0/b"] );
+    
+    
+    dict[ @"a" ] = @{ @"b": @10 };
+    XCTAssertTrue( [dict boolForKeyPath: @"a/b"] );
+    
+    dict[ @"a" ] = @[ @{ @"b": @"false" }, @{ @"b": @100 } ];
+    XCTAssertTrue( [dict boolForKeyPath: @"a/1/b"] );
+    
+    dict[ @"a" ] = @[ @[ @{ @"b": @"false" } ], @[ @{ @"b": @1000 } ] ];
+    XCTAssertTrue( [dict boolForKeyPath: @"a/1/0/b"] );
+    
+    
+    dict[ @"a" ] = @{ @"b": @0 };
+    XCTAssertFalse( [dict boolForKeyPath: @"a/b"] );
+    
+    dict[ @"a" ] = @[ @{ @"b": @"false" }, @{ @"b": @"0" } ];
+    XCTAssertFalse( [dict boolForKeyPath: @"a/1/b"] );
+    
+    dict[ @"a" ] = @[ @[ @{ @"b": @"false" } ], @[ @{ @"b": @"0.0f" } ] ];
+    XCTAssertFalse( [dict boolForKeyPath: @"a/1/0/b"] );
 }
 
 #pragma mark - stringForKeyPath: tests
