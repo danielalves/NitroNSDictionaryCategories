@@ -108,13 +108,6 @@
 	return currNode;
 }
 
-+( BOOL )isKindOfNSString:( id )obj
-{
-    // TODO : Test other string classes
-    
-	return [obj isKindOfClass: [NSString class]];
-}
-
 #pragma mark - BOOL Parsing
 
 -( BOOL )boolForKey:( id )key
@@ -122,53 +115,75 @@
     if( ![self hasKey: key] )
         return NO;
     
-    NSString *tempLowercaseNSString = [[self stringForKey: key] lowercaseString];
-    if( tempLowercaseNSString.length == 0 )
+    NSString *tempNSString = [self stringForKey: key];
+    if( tempNSString.length == 0 )
         return NO;
     
-    if( [tempLowercaseNSString isEqualToString: @"f"]
-       || [tempLowercaseNSString isEqualToString: @"n"]
-       || [tempLowercaseNSString isEqualToString: @"false"]
-       || [tempLowercaseNSString isEqualToString: @"no"] )
-        return NO;
-    
-    if( [tempLowercaseNSString isEqualToString: @"t"]
-       || [tempLowercaseNSString isEqualToString: @"y"]
-       || [tempLowercaseNSString isEqualToString: @"true"]
-       || [tempLowercaseNSString isEqualToString: @"yes"] )
-        return YES;
+    NSNumber *boolFromString = [NSDictionary boolFromNSString: tempNSString];
+    if( boolFromString )
+        return [boolFromString boolValue];
     
 	NSNumber *tempNSNumber = [self numberForKey: key];
 	if( !tempNSNumber )
         return NO;
     
-    const char *underlyingNumberTypeIdentifierStr = [tempNSNumber objCType];
+    return [NSDictionary boolFromNSNumber: tempNSNumber];
+}
+
+-( BOOL )boolForKeyPath:( NSString * )keyPath
+{
+    NSString *tempNSString = [self stringForKeyPath: keyPath];
+    if( tempNSString.length == 0 )
+        return NO;
+    
+    NSNumber *boolFromString = [NSDictionary boolFromNSString: tempNSString];
+    if( boolFromString )
+        return [boolFromString boolValue];
+
+    NSNumber *tempNSNumber = [self numberForKeyPath: keyPath];
+	if( !tempNSNumber )
+        return NO;
+    
+    return [NSDictionary boolFromNSNumber: tempNSNumber];
+}
+
++( NSNumber * )boolFromNSString:( NSString * )string
+{
+    NSString *lowercaseString = [string lowercaseString];
+    
+    if( [lowercaseString isEqualToString: @"f"]
+       || [lowercaseString isEqualToString: @"n"]
+       || [lowercaseString isEqualToString: @"false"]
+       || [lowercaseString isEqualToString: @"no"] )
+        return [NSNumber numberWithBool: NO];
+    
+    if( [lowercaseString isEqualToString: @"t"]
+       || [lowercaseString isEqualToString: @"y"]
+       || [lowercaseString isEqualToString: @"true"]
+       || [lowercaseString isEqualToString: @"yes"] )
+        return [NSNumber numberWithBool: YES];
+    
+    return nil;
+}
+
++( BOOL )boolFromNSNumber:( NSNumber * )number
+{
+    const char *underlyingNumberTypeIdentifierStr = [number objCType];
     if( underlyingNumberTypeIdentifierStr == NULL )
         return NO;
     
     char underlyingNumberTypeIdentifier = underlyingNumberTypeIdentifierStr[0];
     
     if( underlyingNumberTypeIdentifier == @encode( float )[0] )
-        return [tempNSNumber floatValue] != 0.0f;
+        return [number floatValue] != 0.0f;
     
     if( underlyingNumberTypeIdentifier == @encode( double )[0] )
-        return [tempNSNumber doubleValue] != 0.0;
+        return [number doubleValue] != 0.0;
     
     // Long double not supported
     // ...
     
-    return [tempNSNumber longLongValue] != 0;
-}
-
--( BOOL )boolForKeyPath:( NSString * )keyPath
-{
-    // TODO : Rewrite based on boolForKey !!!!
-    
-	NSNumber *temp = [self numberForKeyPath: keyPath];
-	if( temp )
-		return [temp intValue] != 0;
-	
-	return NO;
+    return [number longLongValue] != 0;
 }
 
 #pragma mark - NSString Parsing
