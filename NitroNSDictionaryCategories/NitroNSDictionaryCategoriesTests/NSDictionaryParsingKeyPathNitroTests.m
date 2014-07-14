@@ -366,6 +366,50 @@
 
 #pragma mark - stringForKeyPath: tests
 
+-( void )test_stringForKeyPath_returns_object_string_representation_if_key_exists
+{
+    dict[ key ] = @1;
+    XCTAssertEqualObjects( [dict stringForKeyPath: key], @"1" );
+    
+    dict[ key ] = @( -1 );
+    XCTAssertEqualObjects( [dict stringForKeyPath: key], @"-1" );
+    
+    dict[ key ] = @"test";
+    XCTAssertEqualObjects( [dict stringForKeyPath: key], @"test" );
+    
+    NSObject *temp = [[NSObject alloc] init];
+    dict[ key ] = temp;
+    XCTAssertEqualObjects( [dict stringForKeyPath: key], [temp description] );
+}
+
+-( void )test_stringForKeyPath_returns_nil_when_key_does_not_exist
+{
+    XCTAssertNil( [dict stringForKeyPath: @"kjsabdjhbsd"] );
+}
+
+-( void )test_stringForKeyPath_returns_nil_when_key_is_nil
+{
+    XCTAssertNil( [dict stringForKeyPath: nil] );
+}
+
+-( void )test_stringForKeyPath_returns_nil_when_object_cannot_be_converted_to_string
+{
+    dict[ key ] = [NSNull null];
+    XCTAssertNil( [dict stringForKeyPath: key] );
+}
+
+-( void )test_stringForKeyPath_follows_key_paths
+{
+    dict[ @"a" ] = @{ @"b": @"test" };
+    XCTAssertEqualObjects( [dict stringForKeyPath: @"a/b"], @"test" );
+    
+    dict[ @"a" ] = @[ @{ @"b": @"test" }, @{ @"b": @"a string" } ];
+    XCTAssertEqualObjects( [dict stringForKeyPath: @"a/1/b"], @"a string" );
+    
+    dict[ @"a" ] = @[ @[ @{ @"b": @"test" } ], @[ @{ @"b": @"a string" } ] ];
+    XCTAssertEqualObjects( [dict stringForKeyPath: @"a/1/0/b"], @"a string" );
+}
+
 #pragma mark - arrayForKeyPath: tests
 
 #pragma mark - dictionaryForKeyPath: tests
