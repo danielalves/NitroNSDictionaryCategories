@@ -11,8 +11,10 @@
 		128504A019363099002BEC91 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1285049F19363099002BEC91 /* XCTest.framework */; };
 		128504A119363099002BEC91 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1285049119363099002BEC91 /* Foundation.framework */; };
 		128504A61936309A002BEC91 /* libNitroNSDictionaryCategories.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1285048E19363099002BEC91 /* libNitroNSDictionaryCategories.a */; };
-		128504AE1936309A002BEC91 /* NitroNSDictionaryCategoriesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 128504AD1936309A002BEC91 /* NitroNSDictionaryCategoriesTests.m */; };
+		128504AE1936309A002BEC91 /* NSDictionaryUtilsNitroTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 128504AD1936309A002BEC91 /* NSDictionaryUtilsNitroTests.m */; };
 		128504B91936313E002BEC91 /* NSDictionary+Utils_Nitro.m in Sources */ = {isa = PBXBuildFile; fileRef = 128504B81936313E002BEC91 /* NSDictionary+Utils_Nitro.m */; };
+		12ABAA68197467F300D58CAA /* NSDictionaryParsingKeyPathNitroTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12ABAA66197467F300D58CAA /* NSDictionaryParsingKeyPathNitroTests.m */; };
+		12ABAA69197467F300D58CAA /* NSDictionaryParsingNitroTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12ABAA67197467F300D58CAA /* NSDictionaryParsingNitroTests.m */; };
 		12C1AF53193CC33C0028D2E3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C1AF52193CC33C0028D2E3 /* UIKit.framework */; };
 		12C1AF56193CC7160028D2E3 /* NSDictionary+Parsing_Nitro.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C1AF55193CC7160028D2E3 /* NSDictionary+Parsing_Nitro.m */; };
 /* End PBXBuildFile section */
@@ -45,9 +47,11 @@
 		1285049E19363099002BEC91 /* NitroNSDictionaryCategoriesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NitroNSDictionaryCategoriesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1285049F19363099002BEC91 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		128504A91936309A002BEC91 /* NitroNSDictionaryCategoriesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NitroNSDictionaryCategoriesTests-Info.plist"; sourceTree = "<group>"; };
-		128504AD1936309A002BEC91 /* NitroNSDictionaryCategoriesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NitroNSDictionaryCategoriesTests.m; sourceTree = "<group>"; };
+		128504AD1936309A002BEC91 /* NSDictionaryUtilsNitroTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSDictionaryUtilsNitroTests.m; sourceTree = "<group>"; };
 		128504B71936313E002BEC91 /* NSDictionary+Utils_Nitro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Utils_Nitro.h"; sourceTree = "<group>"; };
 		128504B81936313E002BEC91 /* NSDictionary+Utils_Nitro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Utils_Nitro.m"; sourceTree = "<group>"; };
+		12ABAA66197467F300D58CAA /* NSDictionaryParsingKeyPathNitroTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionaryParsingKeyPathNitroTests.m; sourceTree = "<group>"; };
+		12ABAA67197467F300D58CAA /* NSDictionaryParsingNitroTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionaryParsingNitroTests.m; sourceTree = "<group>"; };
 		12C1AF52193CC33C0028D2E3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		12C1AF54193CC7160028D2E3 /* NSDictionary+Parsing_Nitro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Parsing_Nitro.h"; sourceTree = "<group>"; };
 		12C1AF55193CC7160028D2E3 /* NSDictionary+Parsing_Nitro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Parsing_Nitro.m"; sourceTree = "<group>"; };
@@ -119,7 +123,9 @@
 		128504A71936309A002BEC91 /* NitroNSDictionaryCategoriesTests */ = {
 			isa = PBXGroup;
 			children = (
-				128504AD1936309A002BEC91 /* NitroNSDictionaryCategoriesTests.m */,
+				12ABAA66197467F300D58CAA /* NSDictionaryParsingKeyPathNitroTests.m */,
+				12ABAA67197467F300D58CAA /* NSDictionaryParsingNitroTests.m */,
+				128504AD1936309A002BEC91 /* NSDictionaryUtilsNitroTests.m */,
 				128504A81936309A002BEC91 /* Supporting Files */,
 			);
 			path = NitroNSDictionaryCategoriesTests;
@@ -227,7 +233,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				128504AE1936309A002BEC91 /* NitroNSDictionaryCategoriesTests.m in Sources */,
+				128504AE1936309A002BEC91 /* NSDictionaryUtilsNitroTests.m in Sources */,
+				12ABAA68197467F300D58CAA /* NSDictionaryParsingKeyPathNitroTests.m in Sources */,
+				12ABAA69197467F300D58CAA /* NSDictionaryParsingNitroTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
