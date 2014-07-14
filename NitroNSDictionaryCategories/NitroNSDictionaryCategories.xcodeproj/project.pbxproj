@@ -8,14 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		1285049219363099002BEC91 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1285049119363099002BEC91 /* Foundation.framework */; };
-		1285049719363099002BEC91 /* NitroNSDictionaryCategories.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1285049619363099002BEC91 /* NitroNSDictionaryCategories.h */; };
-		1285049919363099002BEC91 /* NitroNSDictionaryCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 1285049819363099002BEC91 /* NitroNSDictionaryCategories.m */; };
 		128504A019363099002BEC91 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1285049F19363099002BEC91 /* XCTest.framework */; };
 		128504A119363099002BEC91 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1285049119363099002BEC91 /* Foundation.framework */; };
-		128504A31936309A002BEC91 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 128504A21936309A002BEC91 /* UIKit.framework */; };
 		128504A61936309A002BEC91 /* libNitroNSDictionaryCategories.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1285048E19363099002BEC91 /* libNitroNSDictionaryCategories.a */; };
-		128504AC1936309A002BEC91 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 128504AA1936309A002BEC91 /* InfoPlist.strings */; };
 		128504AE1936309A002BEC91 /* NitroNSDictionaryCategoriesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 128504AD1936309A002BEC91 /* NitroNSDictionaryCategoriesTests.m */; };
+		128504B91936313E002BEC91 /* NSDictionary+Utils_Nitro.m in Sources */ = {isa = PBXBuildFile; fileRef = 128504B81936313E002BEC91 /* NSDictionary+Utils_Nitro.m */; };
+		12C1AF53193CC33C0028D2E3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C1AF52193CC33C0028D2E3 /* UIKit.framework */; };
+		12C1AF56193CC7160028D2E3 /* NSDictionary+Parsing_Nitro.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C1AF55193CC7160028D2E3 /* NSDictionary+Parsing_Nitro.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +34,6 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				1285049719363099002BEC91 /* NitroNSDictionaryCategories.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,15 +42,15 @@
 /* Begin PBXFileReference section */
 		1285048E19363099002BEC91 /* libNitroNSDictionaryCategories.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNitroNSDictionaryCategories.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1285049119363099002BEC91 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1285049519363099002BEC91 /* NitroNSDictionaryCategories-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NitroNSDictionaryCategories-Prefix.pch"; sourceTree = "<group>"; };
-		1285049619363099002BEC91 /* NitroNSDictionaryCategories.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NitroNSDictionaryCategories.h; sourceTree = "<group>"; };
-		1285049819363099002BEC91 /* NitroNSDictionaryCategories.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NitroNSDictionaryCategories.m; sourceTree = "<group>"; };
 		1285049E19363099002BEC91 /* NitroNSDictionaryCategoriesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NitroNSDictionaryCategoriesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1285049F19363099002BEC91 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		128504A21936309A002BEC91 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		128504A91936309A002BEC91 /* NitroNSDictionaryCategoriesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NitroNSDictionaryCategoriesTests-Info.plist"; sourceTree = "<group>"; };
-		128504AB1936309A002BEC91 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		128504AD1936309A002BEC91 /* NitroNSDictionaryCategoriesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NitroNSDictionaryCategoriesTests.m; sourceTree = "<group>"; };
+		128504B71936313E002BEC91 /* NSDictionary+Utils_Nitro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Utils_Nitro.h"; sourceTree = "<group>"; };
+		128504B81936313E002BEC91 /* NSDictionary+Utils_Nitro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Utils_Nitro.m"; sourceTree = "<group>"; };
+		12C1AF52193CC33C0028D2E3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		12C1AF54193CC7160028D2E3 /* NSDictionary+Parsing_Nitro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Parsing_Nitro.h"; sourceTree = "<group>"; };
+		12C1AF55193CC7160028D2E3 /* NSDictionary+Parsing_Nitro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Parsing_Nitro.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,10 +66,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				128504A019363099002BEC91 /* XCTest.framework in Frameworks */,
-				128504A31936309A002BEC91 /* UIKit.framework in Frameworks */,
-				128504A61936309A002BEC91 /* libNitroNSDictionaryCategories.a in Frameworks */,
 				128504A119363099002BEC91 /* Foundation.framework in Frameworks */,
+				12C1AF53193CC33C0028D2E3 /* UIKit.framework in Frameworks */,
+				128504A019363099002BEC91 /* XCTest.framework in Frameworks */,
+				128504A61936309A002BEC91 /* libNitroNSDictionaryCategories.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,9 +98,9 @@
 		1285049019363099002BEC91 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				12C1AF52193CC33C0028D2E3 /* UIKit.framework */,
 				1285049119363099002BEC91 /* Foundation.framework */,
 				1285049F19363099002BEC91 /* XCTest.framework */,
-				128504A21936309A002BEC91 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -110,19 +108,12 @@
 		1285049319363099002BEC91 /* NitroNSDictionaryCategories */ = {
 			isa = PBXGroup;
 			children = (
-				1285049619363099002BEC91 /* NitroNSDictionaryCategories.h */,
-				1285049819363099002BEC91 /* NitroNSDictionaryCategories.m */,
-				1285049419363099002BEC91 /* Supporting Files */,
+				128504B71936313E002BEC91 /* NSDictionary+Utils_Nitro.h */,
+				128504B81936313E002BEC91 /* NSDictionary+Utils_Nitro.m */,
+				12C1AF54193CC7160028D2E3 /* NSDictionary+Parsing_Nitro.h */,
+				12C1AF55193CC7160028D2E3 /* NSDictionary+Parsing_Nitro.m */,
 			);
 			path = NitroNSDictionaryCategories;
-			sourceTree = "<group>";
-		};
-		1285049419363099002BEC91 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				1285049519363099002BEC91 /* NitroNSDictionaryCategories-Prefix.pch */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		128504A71936309A002BEC91 /* NitroNSDictionaryCategoriesTests */ = {
@@ -138,7 +129,6 @@
 			isa = PBXGroup;
 			children = (
 				128504A91936309A002BEC91 /* NitroNSDictionaryCategoriesTests-Info.plist */,
-				128504AA1936309A002BEC91 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -189,6 +179,11 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Daniel L. Alves";
+				TargetAttributes = {
+					1285049D19363099002BEC91 = {
+						TestTargetID = 1285048D19363099002BEC91;
+					};
+				};
 			};
 			buildConfigurationList = 1285048919363099002BEC91 /* Build configuration list for PBXProject "NitroNSDictionaryCategories" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -213,7 +208,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				128504AC1936309A002BEC91 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,7 +218,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1285049919363099002BEC91 /* NitroNSDictionaryCategories.m in Sources */,
+				12C1AF56193CC7160028D2E3 /* NSDictionary+Parsing_Nitro.m in Sources */,
+				128504B91936313E002BEC91 /* NSDictionary+Utils_Nitro.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,17 +240,6 @@
 			targetProxy = 128504A41936309A002BEC91 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		128504AA1936309A002BEC91 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				128504AB1936309A002BEC91 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		128504AF1936309A002BEC91 /* Debug */ = {
@@ -289,7 +273,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -320,7 +304,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -331,8 +315,10 @@
 			buildSettings = {
 				DSTROOT = /tmp/NitroNSDictionaryCategories.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "NitroNSDictionaryCategories/NitroNSDictionaryCategories-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -343,8 +329,10 @@
 			buildSettings = {
 				DSTROOT = /tmp/NitroNSDictionaryCategories.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "NitroNSDictionaryCategories/NitroNSDictionaryCategories-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -359,12 +347,18 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "NitroNSDictionaryCategories/NitroNSDictionaryCategories-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "NitroNSDictionaryCategoriesTests/NitroNSDictionaryCategoriesTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -379,8 +373,14 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "NitroNSDictionaryCategories/NitroNSDictionaryCategories-Prefix.pch";
 				INFOPLIST_FILE = "NitroNSDictionaryCategoriesTests/NitroNSDictionaryCategoriesTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -405,6 +405,7 @@
 				128504B31936309A002BEC91 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		128504B41936309A002BEC91 /* Build configuration list for PBXNativeTarget "NitroNSDictionaryCategoriesTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +414,7 @@
 				128504B61936309A002BEC91 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
