@@ -330,6 +330,21 @@
     XCTAssertFalse( [dict boolForKey: key] );
 }
 
+-( void )test_boolForKey_does_not_follow_key_paths
+{
+    dict[ @"a" ] = @{ @"b": @"true" };
+    XCTAssertFalse( [dict boolForKey: @"a/b"] );
+    
+    dict[ @"a/b" ] = @"true";
+    XCTAssertTrue( [dict boolForKey: @"a/b"] );
+    
+    dict[ @"a" ] = @[ @{ @"b": @"false" }, @{ @"b": @"true" } ];
+    XCTAssertFalse( [dict boolForKey: @"a/1/b"] );
+    
+    dict[ @"a/1/b" ] = @"true";
+    XCTAssertTrue( [dict boolForKey: @"a/1/b"] );
+}
+
 #pragma mark - stringForKey tests
 
 -( void )test_stringForKey_returns_object_string_representation_if_key_exists
@@ -362,6 +377,21 @@
 {
     dict[ key ] = [NSNull null];
     XCTAssertNil( [dict stringForKey: key] );
+}
+
+-( void )test_stringForKey_does_not_follow_key_paths
+{
+    dict[ @"a" ] = @{ @"b": @"a string" };
+    XCTAssertNil( [dict stringForKey: @"a/b"] );
+
+    dict[ @"a/b" ] = @"a string";
+    XCTAssertEqualObjects( [dict stringForKey: @"a/b"], @"a string" );
+    
+    dict[ @"a" ] = @[ @{ @"b": @"a string" }, @{ @"b": @"another string" } ];
+    XCTAssertNil( [dict stringForKey: @"a/1/b"] );
+    
+    dict[ @"a/1/b" ] = @"another string";
+    XCTAssertEqualObjects( [dict stringForKey: @"a/1/b"], @"another string" );
 }
 
 #pragma mark - arrayForKey Tests
@@ -413,6 +443,23 @@
     XCTAssertNil( [dict arrayForKey: key] );
 }
 
+-( void )test_arrayForKey_does_not_follow_key_paths
+{
+    dict[ @"a" ] = @{ @"b": @[ @1, @2, @3 ] };
+    XCTAssertNil( [dict arrayForKey: @"a/b"] );
+    
+    dict[ @"a/b" ] = @[ @1, @2, @3 ];
+    NSArray *expected = @[ @1, @2, @3 ];
+    XCTAssertEqualObjects( [dict arrayForKey: @"a/b"], expected );
+    
+    dict[ @"a" ] = @[ @{ @"b": @[ @1, @2, @3 ] }, @{ @"b": @[ @4, @5, @6 ] } ];
+    XCTAssertNil( [dict arrayForKey: @"a/1/b"] );
+    
+    dict[ @"a/1/b" ] = @[ @4, @5, @6 ];
+    expected = @[ @4, @5, @6 ];
+    XCTAssertEqualObjects( [dict arrayForKey: @"a/1/b"], expected );
+}
+
 #pragma mark - dictionaryForKey Tests
 
 -( void )test_dictionaryForKey_returns_dictionary_if_key_exists
@@ -445,7 +492,7 @@
     XCTAssertNil( [dict dictionaryForKey: nil] );
 }
 
--( void )test_dictionaryForKey_returns_nil_when_object_cannot_be_converted_to_array
+-( void )test_dictionaryForKey_returns_nil_when_object_cannot_be_converted_to_dictionary
 {
     dict[ key ] = [NSNull null];
     XCTAssertNil( [dict dictionaryForKey: key] );
@@ -464,6 +511,21 @@
     
     dict[ key ] = @[ @0, @1, @2 ];
     XCTAssertNil( [dict dictionaryForKey: key] );
+}
+
+-( void )test_dictionaryForKey_does_not_follow_key_paths
+{
+    dict[ @"a" ] = @{ @"b": @{ @"bla": @6 } };
+    XCTAssertNil( [dict dictionaryForKey: @"a/b"] );
+    
+    dict[ @"a/b" ] = @{ @"b": @6 };
+     XCTAssertEqualObjects( [dict dictionaryForKey: @"a/b"], @{ @"b": @6 } );
+    
+    dict[ @"a" ] = @[ @{ @"b": @{ @"bla": @6 } }, @{ @"b": @{ @"ble": @7 } } ];
+    XCTAssertNil( [dict dictionaryForKey: @"a/1/b"] );
+
+    dict[ @"a/1/b" ] = @{ @"b": @7 };
+    XCTAssertEqualObjects( [dict dictionaryForKey: @"a/1/b"], @{ @"b": @7 } );
 }
 
 #pragma mark - numberForKey Tests
@@ -546,7 +608,7 @@
     XCTAssertNil( [dict numberForKey: nil] );
 }
 
--( void )test_numberForKey_returns_nil_when_object_cannot_be_converted_to_array
+-( void )test_numberForKey_returns_nil_when_object_cannot_be_converted_to_number
 {
     dict[ key ] = [NSNull null];
     XCTAssertNil( [dict numberForKey: key] );
@@ -568,6 +630,21 @@
     
     dict[ key ] = @[ @0, @1, @2 ];
     XCTAssertNil( [dict numberForKey: key] );
+}
+
+-( void )test_numberForKey_does_not_follow_key_paths
+{
+    dict[ @"a" ] = @{ @"b": @"9.33" };
+    XCTAssertNil( [dict numberForKey: @"a/b"] );
+    
+    dict[ @"a/b" ] = @"9.33";
+    XCTAssertEqualObjects( [dict numberForKey: @"a/b"], @9.33 );
+    
+    dict[ @"a" ] = @[ @{ @"b": @"7.46" }, @{ @"b": @"7.77" } ];
+    XCTAssertNil( [dict numberForKey: @"a/1/b"] );
+    
+    dict[ @"a/1/b" ] = @"7.77";
+    XCTAssertEqualObjects( [dict numberForKey: @"a/1/b"], @7.77 );
 }
 
 #pragma mark - dateForKey:withFormatter: Tests
@@ -657,6 +734,23 @@
     
     dict[ key ] = @[ @0, @1, @2 ];
     XCTAssertNil( [dict dateForKey: key withFormatter: [NitroNSDictionaryCategoriesTests dateFormatter]] );
+}
+
+-( void )test_dateForKey_withFormatter_does_not_follow_key_paths
+{
+    dict[ @"a" ] = @{ @"b": @"13/03/1973 15:32" };
+    XCTAssertNil( [dict dateForKey: @"a/b" withFormatter: [NitroNSDictionaryCategoriesTests dateFormatter]] );
+    
+    dict[ @"a/b" ] = @"13/03/1973 15:32";
+    NSDate *expected = [[NitroNSDictionaryCategoriesTests dateFormatter] dateFromString: dict[ @"a/b" ]];
+    XCTAssertEqualObjects( [dict dateForKey: @"a/b" withFormatter: [NitroNSDictionaryCategoriesTests dateFormatter]], expected );
+    
+    dict[ @"a" ] = @[ @{ @"b": @"10/01/1947 01:44" }, @{ @"b": @"23/07/1953 03:17" } ];
+    XCTAssertNil( [dict dateForKey: @"a/1/b" withFormatter: [NitroNSDictionaryCategoriesTests dateFormatter]] );
+    
+    dict[ @"a/1/b" ] = @"23/07/1953 03:17";
+    expected = [[NitroNSDictionaryCategoriesTests dateFormatter] dateFromString: dict[ @"a/1/b" ]];
+    XCTAssertEqualObjects( [dict dateForKey: @"a/1/b" withFormatter: [NitroNSDictionaryCategoriesTests dateFormatter]], expected );
 }
 
 #pragma mark - hasKey tests

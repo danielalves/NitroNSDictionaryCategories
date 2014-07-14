@@ -175,16 +175,11 @@
 
 -( NSString * )stringForKey:( id )key
 {
-	if( ![NSDictionary isKindOfNSString: key] )
-	{
-		id temp = [NSDictionary objectForKey: key fromDictionaryNode: self];
-		if( temp )
-			return [NSString stringWithFormat: @"%@", temp];
-		
-		return nil;
-	}
-	
-	return [self stringForKeyPath: key];
+    id temp = [NSDictionary objectForKey: key fromDictionaryNode: self];
+    if( temp )
+        return [NSString stringWithFormat: @"%@", temp];
+    
+    return nil;
 }
 
 -( NSString * )stringForKeyPath:( NSString * )keyPath
@@ -202,10 +197,10 @@
 
 -( NSArray * )arrayForKey:( id )key
 {
-	if( ![NSDictionary isKindOfNSString: key] )
-		return [NSDictionary objectForKey: key fromDictionaryNode: self checkForKind: [NSArray class]];
-	
-	return [self arrayForKeyPath: key];
+    // TODO : Class clusters!!!
+    return [NSDictionary objectForKey: key
+                   fromDictionaryNode: self
+                         checkForKind: [NSArray class]];
 }
 
 -( NSArray * )arrayForKeyPath:( NSString * )keyPath
@@ -222,10 +217,10 @@
 
 -( NSDictionary * )dictionaryForKey:( id )key
 {
-	if( ![NSDictionary isKindOfNSString: key] )
-		return [NSDictionary objectForKey: key fromDictionaryNode: self checkForKind: [NSDictionary class]];
-	
-	return [self dictionaryForKeyPath: key];
+    // TODO : Class clusters!!!
+    return [NSDictionary objectForKey: key
+                   fromDictionaryNode: self
+                         checkForKind: [NSDictionary class]];
 }
 
 -( NSDictionary * )dictionaryForKeyPath:( NSString * )keyPath
@@ -242,17 +237,13 @@
 
 -( NSNumber * )numberForKey:( id )key
 {
-	if( ![NSDictionary isKindOfNSString: key] )
-    {
-		return [NSDictionary objectForKey: key
-                       fromDictionaryNode: self
-                             checkForKind: [NSNumber class]
-                          alternateParser:^id( id obj ) {
-            return [NSDictionary tryParsingNumberFromObject: obj];
-        }];
-    }
-	
-	return [self numberForKeyPath: key];
+    // TODO : Class clusters!!!
+    return [NSDictionary objectForKey: key
+                   fromDictionaryNode: self
+                         checkForKind: [NSNumber class]
+                      alternateParser: ^id( id obj ) {
+                          return [NSDictionary tryParsingNumberFromObject: obj];
+                      }];
 }
 
 -( NSNumber * )numberForKeyPath:( NSString * )keyPath
@@ -290,14 +281,9 @@
     
     if( !dateFormatter )
         [NSException raise: NSInvalidArgumentException format: @"%s must not be nil", EVAL_AND_STRINGIFY(dateFormatter)];
-    
-	if( ![NSDictionary isKindOfNSString: key] )
-	{
-        id temp = [NSDictionary objectForKey: key fromDictionaryNode: self];
-		return ( NSDate * )[NSDictionary tryParsingDateFromObject: temp withDateFormatter: dateFormatter];
-	}
-	
-	return [self dateForKeyPath: key withFormatter: dateFormatter];
+
+    id temp = [NSDictionary objectForKey: key fromDictionaryNode: self];
+    return ( NSDate * )[NSDictionary tryParsingDateFromObject: temp withDateFormatter: dateFormatter];
 }
 
 -( NSDate * )dateForKeyPath:( NSString * )keyPath withFormatter:( NSDateFormatter * )dateFormatter
