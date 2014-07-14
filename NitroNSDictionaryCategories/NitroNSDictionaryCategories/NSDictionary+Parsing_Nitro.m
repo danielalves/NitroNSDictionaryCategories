@@ -303,6 +303,9 @@
 
 -( NSDate * )dateForKeyPath:( NSString * )keyPath withFormatter:( NSDateFormatter * )dateFormatter
 {
+    if( !dateFormatter )
+        [NSException raise: NSInvalidArgumentException format: @"%s must not be nil", EVAL_AND_STRINGIFY(dateFormatter)];
+    
     id ret = [self nilCheckedObjectForKeyPath: keyPath];
     if( ret )
         return ( NSDate * )[NSDictionary tryParsingDateFromObject: ret withDateFormatter: dateFormatter];

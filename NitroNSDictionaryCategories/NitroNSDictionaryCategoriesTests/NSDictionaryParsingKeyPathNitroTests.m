@@ -595,41 +595,6 @@
     XCTAssertEqualObjects( [dict numberForKeyPath: key], @9.76e10 );
 }
 
--( void )test_numberForKeyPath_works_with_non_string_keys
-{
-    NSNumber *nonStringKey = @666;
-    
-    dict[ nonStringKey ] = @(-90);
-    XCTAssertEqualObjects( [dict numberForKeyPath: nonStringKey], @(-90) );
-    
-    dict[ nonStringKey ] = @5;
-    XCTAssertEqualObjects( [dict numberForKeyPath: nonStringKey], @5 );
-    
-    dict[ nonStringKey ] = @(-8.554);
-    XCTAssertEqualObjects( [dict numberForKeyPath: nonStringKey], @(-8.554) );
-    
-    dict[ nonStringKey ] = @3.71;
-    XCTAssertEqualObjects( [dict numberForKeyPath: nonStringKey], @3.71 );
-    
-    dict[ nonStringKey ] = @9.76e10;
-    XCTAssertEqualObjects( [dict numberForKeyPath: nonStringKey], @9.76e10 );
-    
-    dict[ nonStringKey ] = @"-90";
-    XCTAssertEqualObjects( [dict numberForKeyPath: nonStringKey], @(-90) );
-    
-    dict[ nonStringKey ] = @"5";
-    XCTAssertEqualObjects( [dict numberForKeyPath: nonStringKey], @5 );
-    
-    dict[ nonStringKey ] = @"-8.554";
-    XCTAssertEqualObjects( [dict numberForKeyPath: nonStringKey], @(-8.554) );
-    
-    dict[ nonStringKey ] = @"3.71";
-    XCTAssertEqualObjects( [dict numberForKeyPath: nonStringKey], @3.71 );
-    
-    dict[ nonStringKey ] = @"9.76e10";
-    XCTAssertEqualObjects( [dict numberForKeyPath: nonStringKey], @9.76e10 );
-}
-
 -( void )test_numberForKeyPath_returns_nil_when_key_does_not_exist
 {
     XCTAssertNil( [dict numberForKeyPath: @"kjsabdjhbsd"] );
@@ -680,6 +645,99 @@
 }
 
 #pragma mark - dateForKeyPath:withFormatter: tests
+
+-( void )test_dateForKeyPath_withFormatter_returns_date_if_key_exists
+{
+    // Before 12:00
+    dict[ key ] = @"08/09/1983 08:00";
+    NSDate *date = [[NSDictionaryParsingKeyPathNitroTests dateFormatter] dateFromString: dict[ key ]];
+    XCTAssertEqualObjects( [dict dateForKeyPath: key withFormatter:[NSDictionaryParsingKeyPathNitroTests dateFormatter]], date );
+    
+    // After 12:00
+    dict[ key ] = @"10/11/2013 13:32";
+    date = [[NSDictionaryParsingKeyPathNitroTests dateFormatter] dateFromString: dict[ key ]];
+    XCTAssertEqualObjects( [dict dateForKeyPath: key withFormatter:[NSDictionaryParsingKeyPathNitroTests dateFormatter]], date );
+}
+
+-( void )test_dateForKeyPath_withFormatter_works_with_date_values
+{
+    dict[ key ] = [[NSDictionaryParsingKeyPathNitroTests dateFormatter] dateFromString: @"08/09/1983 08:00"];
+    NSDate *expected = [[NSDictionaryParsingKeyPathNitroTests dateFormatter] dateFromString: @"08/09/1983 08:00"];
+    
+    XCTAssertEqualObjects( [dict dateForKeyPath: key withFormatter: [NSDictionaryParsingKeyPathNitroTests dateFormatter]], expected );
+    
+}
+
+-( void )test_dateForKeyPath_withFormatter_returns_nil_when_key_does_not_exist
+{
+    XCTAssertNil( [dict dateForKeyPath: @"kjsabdjhbsd" withFormatter: [NSDictionaryParsingKeyPathNitroTests dateFormatter]] );
+}
+
+-( void )test_dateForKeyPath_withFormatter_returns_nil_when_key_is_nil
+{
+    XCTAssertNil( [dict dateForKeyPath: nil withFormatter: [NSDictionaryParsingKeyPathNitroTests dateFormatter]] );
+}
+
+-( void )test_dateForKeyPath_withFormatter_throws_NSInvalidArgumentException_if_dateFormatter_is_nil
+{
+    dict[ key ] = @"25/10/1984";
+    XCTAssertThrowsSpecificNamed( [dict dateForKeyPath: key withFormatter: nil], NSException, NSInvalidArgumentException );
+}
+
+-( void )test_dateForKeyPath_withFormatter_returns_nil_when_object_cannot_be_converted_to_date
+{
+    dict[ key ] = [NSNull null];
+    XCTAssertNil( [dict dateForKeyPath: key withFormatter: [NSDictionaryParsingKeyPathNitroTests dateFormatter]] );
+    
+    dict[ key ] = @5;
+    XCTAssertNil( [dict dateForKeyPath: key withFormatter: [NSDictionaryParsingKeyPathNitroTests dateFormatter]] );
+    
+    dict[ key ] = @23.876;
+    XCTAssertNil( [dict dateForKeyPath: key withFormatter: [NSDictionaryParsingKeyPathNitroTests dateFormatter]] );
+    
+    dict[ key ] = @( -5 );
+    XCTAssertNil( [dict dateForKeyPath: key withFormatter: [NSDictionaryParsingKeyPathNitroTests dateFormatter]] );
+    
+    dict[ key ] = @( -23.876 );
+    XCTAssertNil( [dict dateForKeyPath: key withFormatter: [NSDictionaryParsingKeyPathNitroTests dateFormatter]] );
+    
+    dict[ key ] = @"";
+    XCTAssertNil( [dict dateForKeyPath: key withFormatter: [NSDictionaryParsingKeyPathNitroTests dateFormatter]] );
+    
+    dict[ key ] = @"Yuyu Hakusho";
+    XCTAssertNil( [dict dateForKeyPath: key withFormatter: [NSDictionaryParsingKeyPathNitroTests dateFormatter]] );
+    
+    dict[ key ] = @{};
+    XCTAssertNil( [dict dateForKeyPath: key withFormatter: [NSDictionaryParsingKeyPathNitroTests dateFormatter]] );
+    
+    dict[ key ] = @{ @"key-0": @0 };
+    XCTAssertNil( [dict dateForKeyPath: key withFormatter: [NSDictionaryParsingKeyPathNitroTests dateFormatter]] );
+    
+    dict[ key ] = @[];
+    XCTAssertNil( [dict dateForKeyPath: key withFormatter: [NSDictionaryParsingKeyPathNitroTests dateFormatter]] );
+    
+    dict[ key ] = @[ @0, @1, @2 ];
+    XCTAssertNil( [dict dateForKeyPath: key withFormatter: [NSDictionaryParsingKeyPathNitroTests dateFormatter]] );
+}
+
+-( void )test_dateForKeyPath_withFormatter_follows_key_paths
+{
+    NSDate *expected = [[NSDictionaryParsingKeyPathNitroTests dateFormatter] dateFromString: @"25/06/1888 11:10"];
+    
+    dict[ @"0" ] = @"25/06/1888 11:10";
+    XCTAssertEqualObjects( [dict dateForKeyPath: @"0" withFormatter: [NSDictionaryParsingKeyPathNitroTests dateFormatter]], expected );
+    
+    dict[ @"a" ] = @{ @"b": @"25/06/1888 11:10" };
+    XCTAssertEqualObjects( [dict dateForKeyPath: @"a/b" withFormatter: [NSDictionaryParsingKeyPathNitroTests dateFormatter]], expected );
+    
+    expected = [[NSDictionaryParsingKeyPathNitroTests dateFormatter] dateFromString: @"23/08/1991 20:08"];
+    
+    dict[ @"a" ] = @[ @{ @"b": @"25/06/1888 11:10" }, @{ @"b": @"23/08/1991 20:08" } ];
+    XCTAssertEqualObjects( [dict dateForKeyPath: @"a/1/b" withFormatter: [NSDictionaryParsingKeyPathNitroTests dateFormatter]], expected );
+    
+    dict[ @"a" ] = @[ @[ @{ @"b": @"25/06/1888 11:10" } ], @[ @{ @"b": @"23/08/1991 20:08" } ] ];
+    XCTAssertEqualObjects( [dict dateForKeyPath: @"a/1/0/b" withFormatter: [NSDictionaryParsingKeyPathNitroTests dateFormatter]], expected );
+}
 
 #pragma mark - Helpers
 
