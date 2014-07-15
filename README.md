@@ -1,5 +1,8 @@
 NitroNSDictionaryCategories
 ===========================
+[![Cocoapods](https://cocoapod-badges.herokuapp.com/v/NitroNSDictionaryCategories/badge.png)](http://cocoapods.org/?q=NitroNSDictionaryCategories)
+[![Platform](http://cocoapod-badges.herokuapp.com/p/NitroNSDictionaryCategories/badge.png)](http://cocoadocs.org/docsets/NitroNSDictionaryCategories)
+[![TravisCI](https://travis-ci.org/danielalves/NitroNSDictionaryCategories.svg?branch=master)](https://travis-ci.org/danielalves/NitroNSDictionaryCategories)
 
 **NitroNSDictionaryCategories** offers parsing and utility categories for iOS NSDictionary type.
 
@@ -56,6 +59,21 @@ NSNumber *damage = [backpack numberForKeyPath: @"items/5/properties/0/bonus-dama
 - `hasKey:`: Returns if the dictionary contains the specified key.
 - `keyForObject:`: Returns the key of a given object contained in the dictionary.
 - `getFirstNonNullValueOfKeys:`: Searches the dictionary for the first object which is not nil and not equal to NSNull.
+
+Requirements
+------------
+
+iOS 4.3 or higher, ARC only
+
+Installation
+------------
+
+NitroNSDictionaryCategories is available through [CocoaPods](http://cocoapods.org), to install
+it simply add the following line to your Podfile:
+
+```ruby
+pod "NitroNSDictionaryCategories"
+```
 
 Author
 ------
