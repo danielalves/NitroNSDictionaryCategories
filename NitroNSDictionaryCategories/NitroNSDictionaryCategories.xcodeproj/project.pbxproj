@@ -52,6 +52,7 @@
 		128504B81936313E002BEC91 /* NSDictionary+Utils_Nitro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Utils_Nitro.m"; sourceTree = "<group>"; };
 		12ABAA66197467F300D58CAA /* NSDictionaryParsingKeyPathNitroTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionaryParsingKeyPathNitroTests.m; sourceTree = "<group>"; };
 		12ABAA67197467F300D58CAA /* NSDictionaryParsingNitroTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionaryParsingNitroTests.m; sourceTree = "<group>"; };
+		12ABAAAB1975B0B000D58CAA /* NitroNSDictionaryCategories.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NitroNSDictionaryCategories.h; sourceTree = "<group>"; };
 		12C1AF52193CC33C0028D2E3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		12C1AF54193CC7160028D2E3 /* NSDictionary+Parsing_Nitro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Parsing_Nitro.h"; sourceTree = "<group>"; };
 		12C1AF55193CC7160028D2E3 /* NSDictionary+Parsing_Nitro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Parsing_Nitro.m"; sourceTree = "<group>"; };
@@ -112,10 +113,11 @@
 		1285049319363099002BEC91 /* NitroNSDictionaryCategories */ = {
 			isa = PBXGroup;
 			children = (
-				128504B71936313E002BEC91 /* NSDictionary+Utils_Nitro.h */,
-				128504B81936313E002BEC91 /* NSDictionary+Utils_Nitro.m */,
+				12ABAAAB1975B0B000D58CAA /* NitroNSDictionaryCategories.h */,
 				12C1AF54193CC7160028D2E3 /* NSDictionary+Parsing_Nitro.h */,
 				12C1AF55193CC7160028D2E3 /* NSDictionary+Parsing_Nitro.m */,
+				128504B71936313E002BEC91 /* NSDictionary+Utils_Nitro.h */,
+				128504B81936313E002BEC91 /* NSDictionary+Utils_Nitro.m */,
 			);
 			path = NitroNSDictionaryCategories;
 			sourceTree = "<group>";
