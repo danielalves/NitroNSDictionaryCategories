@@ -1,3 +1,7 @@
 language: objective-c
-xcode_project: NitroNSDictionaryCategories/NitroNSDictionaryCategories.xcodeproj
-xcode_scheme: NitroNSDictionaryCategories
+before_script:
+    - brew update
+    - brew upgrade xctool
+script:
+	- cd NitroNSDictionaryCategories
+    - xctool -project NitroNSDictionaryCategories.xcodeproj -sdk iphonesimulator -scheme NitroNSDictionaryCategories test
