@@ -3,5 +3,4 @@ before_script:
     - brew update
     - brew upgrade xctool
 script:
-	- cd NitroNSDictionaryCategories
-    - xctool -project NitroNSDictionaryCategories.xcodeproj -sdk iphonesimulator -scheme NitroNSDictionaryCategories test
+    - xctool -project NitroNSDictionaryCategories/NitroNSDictionaryCategories.xcodeproj -sdk iphonesimulator -scheme NitroNSDictionaryCategories test
