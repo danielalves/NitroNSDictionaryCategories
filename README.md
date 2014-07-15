@@ -1,7 +1,7 @@
 NitroNSDictionaryCategories
 ===========================
 
-**NitroNSDictionaryCategories** offers parsing and utility categories for iOS/OSX NSDictionary type.
+**NitroNSDictionaryCategories** offers parsing and utility categories for iOS NSDictionary type.
 
 Parsing methods try to parse specifc types from dictionary values. If a value cannot be parsed, methods return nil, so there's a kind of type safety. These methods come in two flavors: the ones which handle `key` as a final value and the ones which handle `key` as a key path.
 
