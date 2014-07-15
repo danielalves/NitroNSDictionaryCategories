@@ -7,19 +7,19 @@ Parsing methods try to parse specifc types from dictionary values. If a value ca
 
 Following a key path is a powerful functionality which lets the user traverse nested dictionaries and arrays with a single command. For example, lets say we have this structure:
 
-```
+```objc
 // Backpack
-{[
+@{ @"backpack": @[
    // Items 0 - 4
    // ...
-   {
-       "type": "sword",
-       "name": "Ultra Lightning Sword of Slashing",
-       "description": "It slashes and shocks!",
-       "properties": [
-           {
-               "name": "lightning",
-               "bonus-damage": 150
+   @{
+       @"type": @"sword",
+       @"name": @"Ultra Lightning Sword of Slashing",
+       @"description": @"It slashes and shocks!",
+       @"properties": @[
+           @{
+               @"name": @"lightning",
+               @"bonus-damage": @150
            },
            // Other properties
            // ...
@@ -33,7 +33,7 @@ Following a key path is a powerful functionality which lets the user traverse ne
 We would parse the lightning bonus damage of Ultra Lightning Sword of Slashing with a single call:
  
 ```objc
-NSNumber *damage = [backpack numberForKeyPath: @"5/properties/0/bonus-damage"];
+NSNumber *damage = [backpack numberForKeyPath: @"backpack/5/properties/0/bonus-damage"];
 ```
 
 **Available parsing methods are:**
