@@ -4,7 +4,7 @@ NitroNSDictionaryCategories
 [![Platform](http://cocoapod-badges.herokuapp.com/p/NitroNSDictionaryCategories/badge.png)](http://cocoadocs.org/docsets/NitroNSDictionaryCategories)
 [![TravisCI](https://travis-ci.org/danielalves/NitroNSDictionaryCategories.svg?branch=master)](https://travis-ci.org/danielalves/NitroNSDictionaryCategories)
 
-**NitroNSDictionaryCategories** offers parsing and utility categories for iOS NSDictionary type.
+**NitroNSDictionaryCategories** offers parsing and utility categories for iOS `NSDictionary` type.
 
 Parsing methods try to parse specifc types from dictionary values. If a value cannot be parsed, methods return nil, so there's a kind of type safety. These methods come in two flavors: the ones which handle `key` as a final value and the ones which handle `key` as a key path.
 
@@ -68,7 +68,7 @@ iOS 4.3 or higher, ARC only
 Installation
 ------------
 
-NitroNSDictionaryCategories is available through [CocoaPods](http://cocoapods.org), to install
+**NitroNSDictionaryCategories** is available through [CocoaPods](http://cocoapods.org), to install
 it simply add the following line to your Podfile:
 
 ```ruby
