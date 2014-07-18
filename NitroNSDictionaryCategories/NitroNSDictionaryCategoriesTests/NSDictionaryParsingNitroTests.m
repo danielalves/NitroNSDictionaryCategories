@@ -2,19 +2,19 @@
 //  NSDictionaryParsingNitroTests.m
 //  NitroNSDictionaryCategoriesTests
 //
-//  Created by Daniel L. Alves on 28/5/14.
+//  Created by Daniel L. Alves on 28/05/14.
 //  Copyright (c) 2014 Daniel L. Alves. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
 
-// nitro
-#import "NSDictionary+Parsing_Nitro.h"
-
 // c
 #import <float.h>
 #import <stdint.h>
 #import <limits.h>
+
+// NitroNSDictionaryCategories
+#import "NSDictionary+Parsing_Nitro.h"
 
 #pragma mark - Defines
 

@@ -2,7 +2,7 @@
 //  NSDictionary+Parsing_Nitro.h
 //  NitroNSDictionaryCategories
 //
-//  Created by Daniel L. Alves on 2/6/14.
+//  Created by Daniel L. Alves on 02/06/14.
 //  Copyright (c) 2014 Daniel L. Alves. All rights reserved.
 //
 

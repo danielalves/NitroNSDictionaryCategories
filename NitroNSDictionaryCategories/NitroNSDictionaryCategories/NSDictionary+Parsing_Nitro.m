@@ -2,13 +2,13 @@
 //  NSDictionary+Parsing_Nitro.m
 //  NitroNSDictionaryCategories
 //
-//  Created by Daniel L. Alves on 2/6/14.
+//  Created by Daniel L. Alves on 02/06/14.
 //  Copyright (c) 2014 Daniel L. Alves. All rights reserved.
 //
 
 #import "NSDictionary+Parsing_Nitro.h"
 
-// nitro
+// NitroNSDictionaryCategories
 #import "NSDictionary+Utils_Nitro.h"
 
 #pragma mark - Macros

@@ -2,17 +2,17 @@
 //  NSDictionaryUtilsNitroTests.m
 //  NitroNSDictionaryCategoriesTests
 //
-//  Created by Daniel L. Alves on 28/5/14.
+//  Created by Daniel L. Alves on 28/05/14.
 //  Copyright (c) 2014 Daniel L. Alves. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
 
-// nitro
-#import "NSDictionary+Utils_Nitro.h"
-
 // ios
 #import <UIKit/UIKit.h>
+
+// NitroNSDictionaryCategories
+#import "NSDictionary+Utils_Nitro.h"
 
 #pragma mark - Assert Helpers
 
