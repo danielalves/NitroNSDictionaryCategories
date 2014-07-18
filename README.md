@@ -75,8 +75,6 @@ it simply add the following line to your Podfile:
 pod "NitroNSDictionaryCategories"
 ```
 
-**Don't forget to add the** `-ObjC` **linker flag to targets using NitroNSDictionaryCategories.** If you don't do so, there'll probably be linker errors. For more info about categories inside static libraries, see: [Building Objective-C static libraries with categories](https://developer.apple.com/library/mac/qa/qa1490/_index.html)
-
 Author
 ------
 
